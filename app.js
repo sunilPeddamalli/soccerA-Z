@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const Match = require('./models/matches');
 const path = require('path');
+const methodOverride = require('method-override');
 
 mongoose.connect('mongodb://localhost/soccerA-Z')
     .then(()=>{
@@ -16,6 +17,7 @@ app.set('view engine', 'ejs');
 app.set('views',path.join(__dirname,'/views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(methodOverride('_method'));
 
 app.get('/',(req,res)=>{
     res.send('Welcome!!!');
@@ -40,6 +42,18 @@ app.get('/matches/:id', async(req,res)=>{
     const {id} = req.params;
     const match = await Match.findById(id);
     res.render('matches/show',{match});
+});
+
+app.get('/matches/:id/edit', async (req,res)=>{
+    const {id} = req.params;
+    const match = await Match.findById(id);
+    res.render('matches/edit',{match});
+});
+
+app.put('/matches/:id', async(req,res)=>{
+    const {id} = req.params;
+    const match = await Match.findByIdAndUpdate(id,req.body.match,{new:true});
+    res.redirect(`/matches/${match._id}`);
 });
 
 app.listen(3000, ()=>{

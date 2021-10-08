@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Match</title>
+</head>
+<body>
+    <h1>Edit Match</h1>
+    <form action="/matches/<%= match._id %>?_method=PUT" method="POST">
+
+            <label for="team1"></label>
+            <input type="text" id='team1' name='match[team1]' placeholder="First Team Name" value="<%= match.team1 %>" >
+
+            <label for="score1"></label>
+            <input type="Number" id='score1' name ='match[score1]' placeholder="First Team Score" value="<%= match.score1 %>" >
+
+            <br><br>
+
+            <label for="team2"></label>
+            <input type="text" id='team2' name='match[team2]' placeholder="Second Team Name" value="<%= match.team2 %>" >
+
+            <label for="score2"></label>
+            <input type="Number" id='score2' name ='match[score2]' placeholder="Second Team Score" value="<%= match.score2 %>" >
+
+            <br><br>
+   
+            <label for='title'>Title:</label>
+            <input type='text' id='title' name='match[title]' placeholder='Add Title' value="<%= match.title %>" >
+
+            <br><br>
+
+            <label for='location'>Location:</label>
+            <input type='text' id='location' name='match[location]' placeholder='Add Location' value="<%= match.location %>" >
+
+            <br><br>
+            
+            <button>Submit</button>
+
+            <br><br>
+
+            <a href="/matches/<%= match._id %> ">Back</a>
+
+    </form>
+</body>
+</html>
