@@ -6,13 +6,13 @@
     <title>All Matches</title>
 </head>
 <body>
-    <h1>Matches</h1>
-    <a href="/">
+    <h1>Matches</h1>    
             <ul>
                 <% for(match of matches){ %> 
-                    <li><%= match.team1 %> <%= match.score1 %> - <%= match.score2 %> <%= match.team2 %></li>
+                    <a href="/matches/<%= match._id %> ">
+                      <li><%= match.team1 %> <%= match.score1 %> - <%= match.score2 %> <%= match.team2 %></li>
+                    </a>
                 <% } %> 
             </ul>
-    </a>
 </body>
 </html>

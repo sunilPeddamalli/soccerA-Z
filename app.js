@@ -24,6 +24,12 @@ app.get('/matches',async(req,res)=>{
     res.render('matches/index',{matches});
 });
 
+app.get('/matches/:id', async(req,res)=>{
+    const {id} = req.params;
+    const match = await Match.findById(id);
+    res.render('matches/show',{match});
+});
+
 app.listen(3000, ()=>{
     console.log('Listening to port 3000 for soccerA-Z');
 })
