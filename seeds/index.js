@@ -7,7 +7,7 @@ mongoose.connect('mongodb://localhost/soccerA-Z')
     }).catch(e =>{
         console.log('Mongo Error- soccerA-Z');
         console.log(e);
-    })
+    });
 
     const seedData = [
         {
@@ -34,7 +34,7 @@ mongoose.connect('mongodb://localhost/soccerA-Z')
             title: 'Premier League',
             location: 'Eithad Stadium, Manchester'
         }
-    ]
+    ];
 
 const seed = async() =>{
     await Match.deleteMany({})
@@ -46,6 +46,6 @@ const seed = async() =>{
 
 seed().then(() => {
     mongoose.connection.close();
-})
+});
 
 
