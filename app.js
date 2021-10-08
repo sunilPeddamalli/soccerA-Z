@@ -14,6 +14,8 @@ mongoose.connect('mongodb://localhost/soccerA-Z')
 
 app.set('view engine', 'ejs');
 app.set('views',path.join(__dirname,'/views'));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.get('/',(req,res)=>{
     res.send('Welcome!!!');
@@ -22,6 +24,16 @@ app.get('/',(req,res)=>{
 app.get('/matches',async(req,res)=>{
     const matches =await Match.find({});
     res.render('matches/index',{matches});
+});
+
+app.get('/matches/new', (req,res) =>{
+    res.render('matches/new');
+});
+
+app.post('/matches', async(req,res)=>{
+   const match = new Match(req.body.match);
+   await match.save();
+   res.redirect('/matches')
 });
 
 app.get('/matches/:id', async(req,res)=>{
