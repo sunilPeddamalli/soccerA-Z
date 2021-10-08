@@ -56,6 +56,12 @@ app.put('/matches/:id', async(req,res)=>{
     res.redirect(`/matches/${match._id}`);
 });
 
+app.delete('/matches/:id', async (req,res)=>{
+    const {id} = req.params;
+    await Match.findByIdAndDelete(id);
+    res.redirect('/matches');
+})
+
 app.listen(3000, ()=>{
     console.log('Listening to port 3000 for soccerA-Z');
 })
