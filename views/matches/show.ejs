@@ -1,7 +1,9 @@
 <% layout('/layout/boilerplate') %> 
 <body>
     <h2><%= match.team1 %> <%= match.score1 %> - <%= match.score2 %> <%= match.team2 %></h2>    
+    <img src="<%= match.image %> " alt="">
     <h3><%= match.title %></h3>
+    <h3><%= match.date %> </h3>
     <h3><%= match.location %> </h3>
     <a href="/matches/<%= match._id %>/edit ">Edit</a>
     <br><br>

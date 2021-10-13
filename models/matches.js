@@ -8,7 +8,8 @@ const matchSchema = new mongoose.Schema({
     // goalScorer1: String,
     // goalScorer2: String,
     // playerOfMatch: String,
-    // Date: String,
+    date: String,
+    image: String,
     // Time: String,
     title: String,
     location: String
