@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const Match = require('./models/matches');
 const path = require('path');
 const methodOverride = require('method-override');
+const ejsMate = require('ejs-mate');
 
 mongoose.connect('mongodb://localhost/soccerA-Z')
     .then(()=>{
@@ -18,6 +19,7 @@ app.set('views',path.join(__dirname,'/views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));
+app.engine('ejs', ejsMate);
 
 app.get('/',(req,res)=>{
     res.send('Welcome!!!');
