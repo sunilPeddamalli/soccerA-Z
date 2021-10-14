@@ -1,12 +1,27 @@
 <% layout('/layout/boilerplate') %> 
-
 <body>
-    <h1>Matches</h1>    
-            <ul>
+    <div class="row">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a class="btn btn-info me-md-2" href='/matches/new'>Add New Match</a>
+          </div>
+
+        <div class="col-6 offset-3">     
                 <% for(match of matches){ %> 
-                    <a href="/matches/<%= match._id %> ">
-                      <li><%= match.team1 %> <%= match.score1 %> - <%= match.score2 %> <%= match.team2 %></li>
-                    </a>
-                <% } %> 
-            </ul>
+                    <div class="list-group ">
+                        <a href="/matches/<%= match._id %>" class='list-group-item list-group-item-action btn btn-outline-info'>
+                            <div class='d-flex justify-content-between'>
+                                <small class="text-muted badge rounded-pill bg-light"><%= match.title %> </small>
+                                <small class="text-muted badge rounded-pill bg-light"><%= match.date %> </small>    
+                            </div>                        
+ 
+                            <div class='text-center text-success'>          
+                                <span class="px-2"><%= match.team1 %></span> 
+                                <span class='text-danger'><%= match.score1 %> - <%= match.score2 %> </span>
+                                <span class="px-2"><%= match.team2 %></span>        
+                            </div>
+                          </a>
+                    </div>
+                <% } %>                   
+        </div>
+    </div>
 </body>
