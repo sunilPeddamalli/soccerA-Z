@@ -1,47 +1,50 @@
 <% layout('/layout/boilerplate') %> 
 <body>
-    <h1>Add New Match</h1>
-    <form action="/matches" method="POST">
+    <div class="row mt-3">
+        <div class="col-6 offset-3">
+            <form action="/matches" method="POST">
+                <div class='mb-3'>
+                    <label for="team1" class='form-label'>First Team:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Team Name" id='team1' name='match[team1]'>
+                        <span class="input-group-text">Score:</span>
+                        <input type="text" class="form-control" placeholder="Score" aria-label="score1" id='score1' name ='match[score1]'>
+                    </div>
+                </div>
 
-            <label for="team1"></label>
-            <input type="text" id='team1' name='match[team1]' placeholder="First Team Name" >
+                <div class="mb-3">
+                    <label for="team2" class='form-label'>Second Team:</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Team Name" id='team2' name='match[team2]'>
+                        <span class="input-group-text">Score:</span>
+                        <input type="text" class="form-control" placeholder="Score" aria-label="score2" id='score2' name ='match[score2]'>
+                    </div>
+                </div>
 
-            <label for="score1"></label>
-            <input type="Number" id='score1' name ='match[score1]' placeholder="First Team Score">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="title" name = 'match[title]' placeholder="Enter Title">
+                    <label for="title" class="form-label">Title:</label>
+                </div>
 
-            <br><br>
+                <div class="form-floating mb-3">
+                    <input type='text' class='form-control' id='date' name='match[date]' placeholder='dd-mmm-yyyy'>
+                    <label for='date' class='form-label'>Date (dd-mmm-yyyy):</label>
+                </div>  
+                
+                <div class="form-floating mb-3">
+                    <input type='text' class='form-control' id='location' name='match[location]' placeholder='City, State'>
+                    <label for='location' class='form-label'>Location (City, State):</label>
+                </div>
+                
+                <div class="form-floating mb-3">
+                    <input type='text' class='form-control' id='image' name='match[image]' placeholder='Add Image URL'>
+                    <label for='image' class='form-label'>ImageUrl:</label>
+                </div>   
 
-            <label for="team2"></label>
-            <input type="text" id='team2' name='match[team2]' placeholder="Second Team Name" >
-
-            <label for="score2"></label>
-            <input type="Number" id='score2' name ='match[score2]' placeholder="Second Team Score">
-
-            <br><br>
-            <label for='image'>ImageUrl:</label>
-            <input type='text' id='image' name='match[image]' placeholder='Add Image URL'>
-            <br><br>
-   
-            <label for='title'>Title:</label>
-            <input type='text' id='title' name='match[title]' placeholder='Add Title'>
-
-            <br><br>
-   
-            <label for='date'>Date:</label>
-            <input type='text' id='date' name='match[date]' placeholder='dd-mmm-yyyy'>
-
-            <br><br>
-
-            <label for='location'>Location:</label>
-            <input type='text' id='location' name='match[location]' placeholder='City, State'>
-
-            <br><br>
-            
-            <button>Submit</button>
-
-            <br><br>
-
-            <a href="/matches">Back</a>
-
-    </form>
+                <div class="mb-3 text-center">
+                    <button class='btn btn-success'>Add Match</button>
+                </div>     
+            </form>
+        </div>
+    </div>   
 </body>
