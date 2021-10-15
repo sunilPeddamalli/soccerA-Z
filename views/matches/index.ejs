@@ -5,18 +5,18 @@
             <a class="btn btn-info me-md-2" href='/matches/new'>Add New Match</a>
           </div>
         <div class="col-6 offset-3">     
-                <% for(match of matches){ %> 
+                <% for(let i=matches.length-1; i>=0; i--){ %> 
                     <div class="list-group ">
-                        <a href="/matches/<%= match._id %>" class='list-group-item list-group-item-action btn btn-outline-info'>
+                        <a href="/matches/<%= matches[i]._id %>" class='list-group-item list-group-item-action btn btn-outline-info'>
                             <div class='d-flex justify-content-between'>
-                                <small class="text-muted badge rounded-pill bg-light"><%= match.title %> </small>
-                                <small class="text-muted badge rounded-pill bg-light"><%= match.date %> </small>    
+                                <small class="text-muted badge rounded-pill bg-light"><%= matches[i].title %> </small>
+                                <small class="text-muted badge rounded-pill bg-light"><%= matches[i].date %> </small>    
                             </div>                        
  
-                            <div class='text-center text-success'>          
-                                <span class="px-2"><%= match.team1 %></span> 
-                                <span class='text-danger'><%= match.score1 %> - <%= match.score2 %> </span>
-                                <span class="px-2"><%= match.team2 %></span>        
+                            <div class='text-center text-danger'>          
+                                <span class="px-2"><%= matches[i].team1 %></span> 
+                                <span class='text-success'><%= matches[i].score1 %> - <%= matches[i].score2 %> </span>
+                                <span class="px-2"><%= matches[i].team2 %></span>        
                             </div>
                           </a>
                     </div>
