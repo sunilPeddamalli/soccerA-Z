@@ -21,6 +21,23 @@
                     </div>
                 </div>
 
+                <div class="row g-3 mb-3">                    
+                    <div class="col">
+                        <label for="teamScorer1" class='form-label'>First Team Goal Scorer:</label>
+                      <textarea type="text" class="form-control" placeholder='name goals, name goals ,...'
+                        aria-label="first Team goalScorer" id='teamScorer1' name=match[goalScorer1]></textarea>
+                    </div>
+                    <div class="col">
+                        <label for="teamScorer2" class='form-label'>Second Team Goal Scorer:</label>
+                        <textarea type="text" class="form-control" placeholder='name goals, name goals ,...' aria-label="second Team goalScorer" id='teamScorer2' name=match[goalScorer2]></textarea>
+                    </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="playerOfTheMatch" name = 'match[playerOfTheMatch]' placeholder="Enter Title">
+                    <label for="playerOfTheMatch" class="form-label">Player of the Match:</label>
+                </div>
+
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="title" name = 'match[title]' placeholder="Enter Title">
                     <label for="title" class="form-label">Title:</label>
@@ -42,7 +59,7 @@
                 </div>   
 
                 <div class="mb-3 text-center">
-                    <button class='btn btn-success'>Add Match</button>
+                    <button class='btn btn-success form-control'>Add Match</button>
                 </div>     
             </form>
         </div>
