@@ -13,10 +13,18 @@
                                 <small class="text-muted badge rounded-pill bg-light"><%= matches[i].date %> </small>    
                             </div>                        
  
-                            <div class='text-center text-danger'>          
-                                <span class="px-2"><%= matches[i].team1 %></span> 
-                                <span class='text-success'><%= matches[i].score1 %> - <%= matches[i].score2 %> </span>
-                                <span class="px-2"><%= matches[i].team2 %></span>        
+                            <div class='text-center'> 
+                                <span class="row m-0">                            
+                                        <span class="col-5 p-0 d-flex justify-content-end">
+                                            <span class="px-2"><%= matches[i].team1 %></span> 
+                                        </span>
+                                        <span class="col-2">
+                                            <span class='text-light bg-success px-1'><%= matches[i].score1 %> - <%= matches[i].score2 %> </span>
+                                        </span>
+                                        <span class="col-5 p-0 d-flex justify-content-start">
+                                            <span class="px-2"><%= matches[i].team2 %></span>     
+                                        </span>                           
+                                </span>        
                             </div>
                           </a>
                     </div>
