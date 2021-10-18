@@ -43,8 +43,8 @@ app.post('/matches', async(req,res)=>{
 app.get('/matches/:id', async(req,res)=>{
     const {id} = req.params;
     const match = await Match.findById(id);
-    const goalScorer1 = match.goalScorer1.join().split(',');
-    const goalScorer2 = match.goalScorer2.join().split(',');
+    const goalScorer1 = match.goalScorer1.split(',');
+    const goalScorer2 = match.goalScorer2.split(',');
     res.render('matches/show',{match, goalScorer1, goalScorer2});
 });
 
