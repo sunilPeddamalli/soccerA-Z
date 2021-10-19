@@ -19,7 +19,35 @@
                                             <span class="px-2"><%= matches[i].team1 %></span> 
                                         </span>
                                         <span class="col-2">
-                                            <span class='text-light bg-success px-1'><%= matches[i].score1 %> - <%= matches[i].score2 %> </span>
+                                            <% if(matches[i].team1 === 'Soccer A-Z'){ %>
+                                                <% if(matches[i].score1 > matches[i].score2 ) {%>
+                                                    <span class='text-light bg-success px-1 rounded'><%= matches[i].score1 %> - <%= matches[i].score2 %> </span>
+                                                <% } %>  
+
+                                                <% if(matches[i].score1 < matches[i].score2 ) {%>
+                                                    <span class='text-light bg-danger px-1 rounded'><%= matches[i].score1 %> - <%= matches[i].score2 %> </span>
+                                                <% } %> 
+
+                                                <% if(matches[i].score1 === matches[i].score2 ) {%>
+                                                    <span class='text-light bg-secondary px-1 rounded'><%= matches[i].score1 %> - <%= matches[i].score2 %> </span>
+                                                <% } %> 
+
+                                            <%} else if(matches[i].team2 === 'Soccer A-Z'){ %> 
+                                                <% if(matches[i].score1 < matches[i].score2 ) {%>
+                                                    <span class='text-light bg-success px-1 rounded'><%= matches[i].score1 %> - <%= matches[i].score2 %> </span>
+                                                <% } %>  
+
+                                                <% if(matches[i].score1 > matches[i].score2 ) {%>
+                                                    <span class='text-light bg-danger px-1 rounded'><%= matches[i].score1 %> - <%= matches[i].score2 %> </span>
+                                                <% } %> 
+
+                                                <% if(matches[i].score1 === matches[i].score2 ) {%>
+                                                    <span class='text-light bg-secondary px-1 rounded'><%= matches[i].score1 %> - <%= matches[i].score2 %> </span>
+                                                <% } %> 
+
+                                            <%} else {%>
+                                                <span class='text-light bg-info px-1 rounded'><%= matches[i].score1 %> - <%= matches[i].score2 %> </span>
+                                            <% } %> 
                                         </span>
                                         <span class="col p-0 d-flex justify-content-start">
                                             <span class="px-2"><%= matches[i].team2 %></span>     
