@@ -1,12 +1,12 @@
 <% layout('/layout/boilerplate') %> 
 <body>
     <div class="row mt-3">
-        <div class="col-6 offset-3">
+        <div class="col col-md-8 offset-md-2 col-lg-6 offset-lg-3">
             <div class="card">                
                 <div class="card-body">  
                   <h5 class='text-center card-title'> 
                     <span class="row m-0">                            
-                            <span class="col-5 p-0 d-flex justify-content-end">
+                            <span class="col p-0 d-flex justify-content-end">
                                 <span class="px-2"><%= match.team1 %></span> 
                             </span>
                             <span class="col-2">
@@ -37,7 +37,7 @@
                   <small class=' d-block text-muted fw-bold mb-2'>✨<%= match.playerOfTheMatch %> </small>
                 </div>
 
-                <img src="<%= match.image %>" class="card-img" alt="...">
+                <img src="<%= match.image %>" class="card-img rounded " alt="...">
 
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">🏆 <%= match.title %></li>
