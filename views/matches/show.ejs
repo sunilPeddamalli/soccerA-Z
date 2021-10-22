@@ -23,7 +23,7 @@
                               <small class='d-block d-flex justify-content-end text-muted'><% if(scorer !=='') {%> ⛹️‍♂️ <% } %>   <%= scorer %></small>
                             <% } %> 
                       </small>
-                      <span class="input-group-text bg-white border-0">⚽</span>
+                      <span class="input-group-text bg-white border-0"><% if(match.goalScorer1 !=='' || match.goalScorer2 !=='') {%> ⚽<% } %> </span>
                       <small class="form-control border-0" >
                           <% for(scorer of goalScorer2){ %> 
                             <small class='d-block d-flex justify-content-start text-muted'><% if(scorer !=='') {%> ⛹️‍♂️ <% } %>  <%= scorer %></small>
