@@ -3,22 +3,22 @@
 <body>
     <div class="row mt-3">
         <div class="col col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-            <form action="/matches/<%= match._id %>?_method=PUT" method="POST">
+            <form action="/matches/<%= match._id %>?_method=PUT" method="POST" novalidate class="validate-form">
                 <div class='mb-3'>
                     <label for="team1" class='form-label text-white'>First Team:</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" value="<%= match.team1 %>" id='team1' name='match[team1]'>
+                        <input type="text" class="form-control" value="<%= match.team1 %>" id='team1' name='match[team1]'required>
                         <span class="input-group-text">Score:</span>
-                        <input type="text" class="form-control" value="<%= match.score1 %>" aria-label="score1" id='score1' name ='match[score1]'>
+                        <input type="text" class="form-control" value="<%= match.score1 %>" aria-label="score1" id='score1' name ='match[score1]'required>
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="team2" class='form-label text-white'>Second Team:</label>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" value="<%= match.team2 %>" id='team2' name='match[team2]'>
+                        <input type="text" class="form-control" value="<%= match.team2 %>" id='team2' name='match[team2]'required>
                         <span class="input-group-text">Score:</span>
-                        <input type="text" class="form-control" value="<%= match.score2 %>" aria-label="score2" id='score2' name ='match[score2]'>
+                        <input type="text" class="form-control" value="<%= match.score2 %>" aria-label="score2" id='score2' name ='match[score2]'required>
                     </div>
                 </div>
 
@@ -36,22 +36,22 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="playerOfTheMatch" name = 'match[playerOfTheMatch]' value="<%= match.playerOfTheMatch %> ">
+                    <input type="text" class="form-control" id="playerOfTheMatch" name = 'match[playerOfTheMatch]' value="<%= match.playerOfTheMatch %>" required>
                     <label for="playerOfTheMatch" class="form-label">Player of the Match:</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="title" name = 'match[title]' placeholder="Enter Title" value="<%= match.title %>">
+                    <input type="text" class="form-control" id="title" name = 'match[title]' placeholder="Enter Title" value="<%= match.title %>" required>
                     <label for="title" class="form-label">Title:</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type='text' class='form-control' id='date' name='match[date]' placeholder='dd-mmm-yyyy' value="<%= match.date%>">
+                    <input type='text' class='form-control' id='date' name='match[date]' placeholder='dd-mmm-yyyy' value="<%= match.date%>" required>
                     <label for='date' class='form-label'>Date (dd-mmm-yyyy):</label>
                 </div>  
                 
                 <div class="form-floating mb-3">
-                    <input type='text' class='form-control' id='location' name='match[location]' placeholder='City, State' value="<%= match.location %>">
+                    <input type='text' class='form-control' id='location' name='match[location]' placeholder='City, State' value="<%= match.location %>" required>
                     <label for='location' class='form-label'>Location (City, State):</label>
                 </div>
                 
