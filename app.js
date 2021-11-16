@@ -5,6 +5,7 @@ const Match = require('./models/matches');
 const path = require('path');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
+const catchError = require('./utils/catchError')
 
 mongoose.connect('mongodb://localhost/soccerA-Z')
     .then(()=>{
@@ -26,47 +27,52 @@ app.get('/',(req,res)=>{
     res.send('Welcome!!!');
 })
 
-app.get('/matches',async(req,res)=>{
+app.get('/matches',catchError(async(req,res)=>{
     const matches =await Match.find({});
     res.render('matches/index',{matches});
-});
+}));
 
 app.get('/matches/new', (req,res) =>{
     res.render('matches/new');
 });
 
-app.post('/matches', async(req,res)=>{
+app.post('/matches', catchError(async(req,res)=>{
    const match = new Match(req.body.match);
    await match.save();
    res.redirect('/matches')
-});
+}));
 
-app.get('/matches/:id', async(req,res)=>{
+app.get('/matches/:id', catchError(async(req,res)=>{
     const {id} = req.params;
     const match = await Match.findById(id);
     const goalScorer1 = match.goalScorer1.split(',');
     const goalScorer2 = match.goalScorer2.split(',');
     res.render('matches/show',{match, goalScorer1, goalScorer2});
-});
+}));
 
-app.get('/matches/:id/edit', async (req,res)=>{
+app.get('/matches/:id/edit', catchError(async (req,res)=>{
     const {id} = req.params;
     const match = await Match.findById(id);
     res.render('matches/edit',{match});
-});
+}));
 
-app.put('/matches/:id', async(req,res)=>{
+app.put('/matches/:id', catchError(async(req,res)=>{
     const {id} = req.params;
     const match = await Match.findByIdAndUpdate(id,req.body.match,{new:true});
     res.redirect(`/matches/${match._id}`);
-});
+}));
 
-app.delete('/matches/:id', async (req,res)=>{
+app.delete('/matches/:id', catchError(async (req,res)=>{
     const {id} = req.params;
     await Match.findByIdAndDelete(id);
     res.redirect('/matches');
-})
+}));
+
+app.use((err,req,res,next)=>{
+    const {message = 'Something went wrong',statusCode= 500} = err
+    res.status(statusCode).send(message);
+});
 
 app.listen(3000, ()=>{
     console.log('Listening to port 3000 for soccerA-Z');
-})
+});
