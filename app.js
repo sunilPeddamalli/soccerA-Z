@@ -6,6 +6,7 @@ const path = require('path');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const catchError = require('./utils/catchError')
+const expressError = require('./utils/expressError')
 
 mongoose.connect('mongodb://localhost/soccerA-Z')
     .then(()=>{
@@ -67,6 +68,10 @@ app.delete('/matches/:id', catchError(async (req,res)=>{
     await Match.findByIdAndDelete(id);
     res.redirect('/matches');
 }));
+
+app.use('*',(req,res)=>{
+    throw new expressError('Page not found!', 404)
+});
 
 app.use((err,req,res,next)=>{
     const {message = 'Something went wrong',statusCode= 500} = err
