@@ -69,13 +69,14 @@ app.delete('/matches/:id', catchError(async (req,res)=>{
     res.redirect('/matches');
 }));
 
-app.use('*',(req,res)=>{
+app.use('*', (req,res)=>{
     throw new expressError('Page not found!', 404)
 });
 
 app.use((err,req,res,next)=>{
-    const {message = 'Something went wrong',statusCode= 500} = err
-    res.status(statusCode).send(message);
+    const {statusCode= 500} = err
+    if(!err.message) err.message = 'Something went wrong';
+    res.status(statusCode).render('error.ejs',{err})
 });
 
 app.listen(3000, ()=>{
