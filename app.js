@@ -5,8 +5,9 @@ const Match = require('./models/matches');
 const path = require('path');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
-const catchError = require('./utils/catchError')
-const expressError = require('./utils/expressError')
+const catchError = require('./utils/catchError');
+const expressError = require('./utils/expressError');
+const Joi = require('joi');
 
 mongoose.connect('mongodb://localhost/soccerA-Z')
     .then(()=>{
@@ -24,6 +25,28 @@ app.use(methodOverride('_method'));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, '/public')))
 
+const validateMatch = (req,res,next) => {
+    const matchSchema = Joi.object({
+        match: Joi.object({
+         team1:Joi.string().required(),
+         score1:Joi.number().required().min(0),
+         team2:Joi.string().required(),
+         score2:Joi.number().required().min(0),
+         goalScorer1: Joi.string().allow(''),
+         goalScorer2: Joi.string().allow(''),
+         playerOfTheMatch: Joi.string().required(),
+         title: Joi.string().required(),
+         date:Joi.string().required(),
+         location: Joi.string().required(),
+         image:Joi.string().allow('')
+        }).required()
+    })
+ 
+    const result= matchSchema.validate(req.body);
+    if(result.error) throw new expressError(result.error.details[0].message,400);
+    next();
+}
+
 app.get('/',(req,res)=>{
     res.send('Welcome!!!');
 })
@@ -37,7 +60,7 @@ app.get('/matches/new', (req,res) =>{
     res.render('matches/new');
 });
 
-app.post('/matches', catchError(async(req,res)=>{
+app.post('/matches',validateMatch, catchError(async(req,res)=>{
    const match = new Match(req.body.match);
    await match.save();
    res.redirect('/matches')
@@ -57,7 +80,7 @@ app.get('/matches/:id/edit', catchError(async (req,res)=>{
     res.render('matches/edit',{match});
 }));
 
-app.put('/matches/:id', catchError(async(req,res)=>{
+app.put('/matches/:id', validateMatch, catchError(async(req,res,next)=>{
     const {id} = req.params;
     const match = await Match.findByIdAndUpdate(id,req.body.match,{new:true});
     res.redirect(`/matches/${match._id}`);
