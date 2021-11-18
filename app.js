@@ -7,7 +7,7 @@ const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const catchError = require('./utils/catchError');
 const expressError = require('./utils/expressError');
-const Joi = require('joi');
+const {matchSchema}= require('./schemas.js')
 
 mongoose.connect('mongodb://localhost/soccerA-Z')
     .then(()=>{
@@ -26,25 +26,12 @@ app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, '/public')))
 
 const validateMatch = (req,res,next) => {
-    const matchSchema = Joi.object({
-        match: Joi.object({
-         team1:Joi.string().required(),
-         score1:Joi.number().required().min(0),
-         team2:Joi.string().required(),
-         score2:Joi.number().required().min(0),
-         goalScorer1: Joi.string().allow(''),
-         goalScorer2: Joi.string().allow(''),
-         playerOfTheMatch: Joi.string().required(),
-         title: Joi.string().required(),
-         date:Joi.string().required(),
-         location: Joi.string().required(),
-         image:Joi.string().allow('')
-        }).required()
-    })
- 
     const result= matchSchema.validate(req.body);
-    if(result.error) throw new expressError(result.error.details[0].message,400);
-    next();
+    if(result.error){
+        throw new expressError(result.error.details[0].message,400);
+    } else{
+        next();
+    }
 }
 
 app.get('/',(req,res)=>{
