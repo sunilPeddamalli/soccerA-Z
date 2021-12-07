@@ -8,7 +8,7 @@ const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const catchError = require('./utils/catchError');
 const expressError = require('./utils/expressError');
-const {matchSchema}= require('./schemas.js')
+const {matchSchema, feedbackSchema}= require('./schemas.js')
 
 mongoose.connect('mongodb://localhost/soccerA-Z')
     .then(()=>{
@@ -28,6 +28,15 @@ app.use(express.static(path.join(__dirname, '/public')))
 
 const validateMatch = (req,res,next) => {
     const result= matchSchema.validate(req.body);
+    if(result.error){
+        throw new expressError(result.error.details[0].message,400);
+    } else{
+        next();
+    }
+}
+
+const validateFeedback = (req,res,next) => {
+    const result = feedbackSchema.validate(req.body);
     if(result.error){
         throw new expressError(result.error.details[0].message,400);
     } else{
@@ -80,7 +89,7 @@ app.delete('/matches/:id', catchError(async (req,res)=>{
     res.redirect('/matches');
 }));
 
-app.post('/matches/:id/feedbacks', catchError(async(req,res)=>{
+app.post('/matches/:id/feedbacks',validateFeedback, catchError(async(req,res)=>{
     const {id} = req.params;
     const match = await Match.findById(id);
     const feedback = new Feedback(req.body.feedback);

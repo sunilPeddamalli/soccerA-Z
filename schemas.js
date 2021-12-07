@@ -14,5 +14,11 @@ const Joi = require('joi');
          location: Joi.string().required(),
          image:Joi.string().allow('')
         }).required()
-    })
+    });
+
+    module.exports.feedbackSchema = Joi.object({
+        feedback: Joi.object({
+            body:Joi.string().required(),
+        }).required()
+    });
  

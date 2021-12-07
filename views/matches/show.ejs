@@ -57,10 +57,10 @@
 
     <div class="row mt-3">
         <div class="col col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-          <form action="/matches/<%=match._id%>/feedbacks" method="POST">
+          <form action="/matches/<%=match._id%>/feedbacks" method="POST" novalidate class="validate-form">
             <label for="feedback" class='form-label text-white'>Leave your feedback:</label>
             <textarea type="text" class="form-control" placeholder=''
-              aria-label="feedback" id='feedback' name=feedback[body]></textarea>
+              aria-label="feedback" id='feedback' name=feedback[body] required></textarea>
             <button class='btn btn-success form-control'>Submit</button>
           </form>
         </div>
