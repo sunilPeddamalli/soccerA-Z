@@ -12,7 +12,13 @@ const matchSchema = new mongoose.Schema({
     image: String,
     // Time: String,
     title: String,
-    location: String
+    location: String,
+    feedbacks:[
+            {
+                type:mongoose.Schema.Types.ObjectId,
+                ref:'Feedback'
+            }
+        ]
 })
 
 module.exports  = mongoose.model('Match', matchSchema);
