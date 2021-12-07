@@ -79,6 +79,10 @@ app.delete('/matches/:id', catchError(async (req,res)=>{
     res.redirect('/matches');
 }));
 
+app.post('/matches/:id/feedbacks', catchError(async(req,res)=>{
+    res.send('Feedback Submitted!');
+}));
+
 app.use('*', (req,res)=>{
     throw new expressError('Page not found!', 404)
 });

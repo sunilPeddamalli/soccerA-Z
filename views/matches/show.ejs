@@ -29,7 +29,7 @@
                             <small class='d-block d-flex justify-content-start text-muted'><% if(scorer !=='') {%> ⛹️‍♂️ <% } %>  <%= scorer %></small>
                           <% } %> 
                       </small>
-                    </p>
+                  </p>
                 </div>
 
                 <div class=' list-group  text-muted text-center'>
@@ -52,6 +52,17 @@
                   </form>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+          <form action="/matches/<%=match._id%>/feedbacks" method="POST">
+            <label for="feedback" class='form-label text-white'>Leave your feedback:</label>
+            <textarea type="text" class="form-control" placeholder=''
+              aria-label="feedback" id='feedback' name=feedback[body]></textarea>
+            <button class='btn btn-success form-control'>Submit</button>
+          </form>
         </div>
     </div>
 </body>
