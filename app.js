@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const Match = require('./models/matches');
+const Feedback = require('./models/feedback');
 const path = require('path');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
@@ -80,7 +81,13 @@ app.delete('/matches/:id', catchError(async (req,res)=>{
 }));
 
 app.post('/matches/:id/feedbacks', catchError(async(req,res)=>{
-    res.send('Feedback Submitted!');
+    const {id} = req.params;
+    const match = await Match.findById(id);
+    const feedback = new Feedback(req.body.feedback);
+    match.feedbacks.push(feedback);
+    await match.save()
+    await feedback.save();
+    res.redirect(`/matches/${match._id}`);
 }));
 
 app.use('*', (req,res)=>{
