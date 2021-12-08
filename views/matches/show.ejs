@@ -60,7 +60,7 @@
           <form action="/matches/<%=match._id%>/feedbacks" method="POST" novalidate class="validate-form">
             <label for="feedback" class='form-label text-white'>Leave your feedback:</label>
             <textarea type="text" class="form-control" placeholder=''
-              aria-label="feedback" id='feedback' name=feedback[body] required></textarea>
+              aria-label="feedback" rows='3' id='feedback' name=feedback[body] required></textarea>
             <button class='btn btn-success form-control'>Submit</button>
           </form>
         </div>
@@ -70,12 +70,18 @@
         <div class="col col-md-8 offset-md-2 col-lg-6 offset-lg-3">
           <% for(let feedback of match.feedbacks){ %> 
             <div class="card mb-3">
-                <ul class="list-group list-group-flush">
+              <div class='class-body  form-control bg-light bg-gradient text-muted'>
+                <h6 class='card-title pt-1 mb-0'>feedback:</h6>
+                <small class='card-title'><%= feedback.body %> </small>
+              </div>
+
+
+                <!-- <ul class="list-group list-group-flush">
                   <li class="list-group-item text-muted">
                     feedback:<br>
-                    <%= feedback.body %> 
+                    
                   </li>
-                </ul>
+                </ul> -->
             </div>
             <% } %> 
         </div> 

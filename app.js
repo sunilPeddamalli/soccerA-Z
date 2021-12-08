@@ -66,7 +66,6 @@ app.post('/matches',validateMatch, catchError(async(req,res)=>{
 app.get('/matches/:id', catchError(async(req,res)=>{
     const {id} = req.params;
     const match = await Match.findById(id).populate('feedbacks');
-    console.log(match)
     const goalScorer1 = match.goalScorer1.split(',');
     const goalScorer2 = match.goalScorer2.split(',');
     res.render('matches/show',{match, goalScorer1, goalScorer2});
