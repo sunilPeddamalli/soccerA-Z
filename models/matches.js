@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Feedback = require('./feedback');
 
 const matchSchema = new mongoose.Schema({
     team1: String,
@@ -20,6 +21,12 @@ const matchSchema = new mongoose.Schema({
             }
         ]
 })
+
+matchSchema.post('findOneAndDelete', async function(match){
+        if(match){
+            await Feedback.deleteMany({_id:{$in: match.feedbacks}})
+        }
+});
 
 module.exports  = mongoose.model('Match', matchSchema);
 
