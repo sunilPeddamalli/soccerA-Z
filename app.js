@@ -99,6 +99,13 @@ app.post('/matches/:id/feedbacks',validateFeedback, catchError(async(req,res)=>{
     res.redirect(`/matches/${match._id}`);
 }));
 
+app.delete('/matches/:id/feedbacks/:feedbackId', catchError(async(req,res)=>{
+    const {id, feedbackId} = req.params;
+    await Match.findByIdAndUpdate(id,{$pull: {feedbacks:feedbackId}})
+    await Feedback.findByIdAndDelete(feedbackId);
+    res.redirect(`/matches/${id}`);
+}));
+
 app.use('*', (req,res)=>{
     throw new expressError('Page not found!', 404)
 });

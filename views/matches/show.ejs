@@ -70,18 +70,13 @@
         <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
           <% for(let feedback of match.feedbacks){ %> 
             <div class="card mb-3">
-              <div class='class-body  form-control bg-light bg-gradient text-muted'>
-                <h6 class='card-title pt-1 mb-0'>feedback:</h6>
-                <small class='card-title'><%= feedback.body %> </small>
+              <div class='class-body form-control bg-light bg-gradient text-muted'>
+                <h6 class='card-title pt-1 mb-0 d-inline'>feedback:</h6>
+                <form action="/matches/<%=match._id%>/feedbacks/<%=feedback._id%>?_method=DELETE" method="POST" class='d-inline'>
+                  <button class='btn btn-link text-danger'>Delete</button>
+                </form>
+                <small class='card-title d-block'><%= feedback.body %> </small>  
               </div>
-
-
-                <!-- <ul class="list-group list-group-flush">
-                  <li class="list-group-item text-muted">
-                    feedback:<br>
-                    
-                  </li>
-                </ul> -->
             </div>
             <% } %> 
         </div> 
