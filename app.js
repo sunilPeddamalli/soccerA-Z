@@ -60,7 +60,7 @@ app.get('/matches/new', (req,res) =>{
 app.post('/matches',validateMatch, catchError(async(req,res)=>{
    const match = new Match(req.body.match);
    await match.save();
-   res.redirect('/matches')
+   res.redirect(`/matches/${match._id}`)
 }));
 
 app.get('/matches/:id', catchError(async(req,res)=>{
