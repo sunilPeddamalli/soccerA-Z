@@ -8,13 +8,11 @@ const expressError = require('./utils/expressError');
 const matches = require('./routes/matches.js')
 const feedbacks = require('./routes/feedbacks.js')
 
-
 // moved to seperate route folder
 // const Match = require('./models/matches');
 // const Feedback = require('./models/feedback');
 // const catchError = require('./utils/catchError');
 // const {matchSchema, feedbackSchema}= require('./schemas.js');
-
 
 mongoose.connect('mongodb://localhost/soccerA-Z')
     .then(()=>{
