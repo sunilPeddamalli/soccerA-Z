@@ -8,7 +8,8 @@ const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const catchError = require('./utils/catchError');
 const expressError = require('./utils/expressError');
-const {matchSchema, feedbackSchema}= require('./schemas.js')
+const {matchSchema, feedbackSchema}= require('./schemas.js');
+const matches = require('./routes/matches.js')
 
 mongoose.connect('mongodb://localhost/soccerA-Z')
     .then(()=>{
@@ -26,14 +27,6 @@ app.use(methodOverride('_method'));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, '/public')))
 
-const validateMatch = (req,res,next) => {
-    const result= matchSchema.validate(req.body);
-    if(result.error){
-        throw new expressError(result.error.details[0].message,400);
-    } else{
-        next();
-    }
-}
 
 const validateFeedback = (req,res,next) => {
     const result = feedbackSchema.validate(req.body);
@@ -48,46 +41,8 @@ app.get('/',(req,res)=>{
     res.send('Welcome!!!');
 })
 
-app.get('/matches',catchError(async(req,res)=>{
-    const matches =await Match.find({});
-    res.render('matches/index',{matches});
-}));
+app.use('/',matches);
 
-app.get('/matches/new', (req,res) =>{
-    res.render('matches/new');
-});
-
-app.post('/matches',validateMatch, catchError(async(req,res)=>{
-   const match = new Match(req.body.match);
-   await match.save();
-   res.redirect(`/matches/${match._id}`)
-}));
-
-app.get('/matches/:id', catchError(async(req,res)=>{
-    const {id} = req.params;
-    const match = await Match.findById(id).populate('feedbacks');
-    const goalScorer1 = match.goalScorer1.split(',');
-    const goalScorer2 = match.goalScorer2.split(',');
-    res.render('matches/show',{match, goalScorer1, goalScorer2});
-}));
-
-app.get('/matches/:id/edit', catchError(async (req,res)=>{
-    const {id} = req.params;
-    const match = await Match.findById(id);
-    res.render('matches/edit',{match});
-}));
-
-app.put('/matches/:id', validateMatch, catchError(async(req,res,next)=>{
-    const {id} = req.params;
-    const match = await Match.findByIdAndUpdate(id,req.body.match,{new:true});
-    res.redirect(`/matches/${match._id}`);
-}));
-
-app.delete('/matches/:id', catchError(async (req,res)=>{
-    const {id} = req.params;
-    await Match.findByIdAndDelete(id);
-    res.redirect('/matches');
-}));
 
 app.post('/matches/:id/feedbacks',validateFeedback, catchError(async(req,res)=>{
     const {id} = req.params;
