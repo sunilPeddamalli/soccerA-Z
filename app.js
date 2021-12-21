@@ -8,6 +8,7 @@ const expressError = require('./utils/expressError');
 const matches = require('./routes/matches.js')
 const feedbacks = require('./routes/feedbacks.js')
 const session = require('express-session');
+const flash = require('connect-flash');
 
 // moved to seperate route folder
 // const Match = require('./models/matches');
@@ -43,6 +44,13 @@ const sessionConfig = {
 }
 
 app.use(session(sessionConfig));
+app.use(flash())
+
+app.use((req,res,next)=>{
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next()
+}) 
 
 app.get('/',(req,res)=>{
     res.send('Welcome!!!');

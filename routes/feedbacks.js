@@ -23,6 +23,7 @@ router.post('/matches/:id/feedbacks',validateFeedback, catchError(async(req,res)
     match.feedbacks.push(feedback);
     await match.save()
     await feedback.save();
+    req.flash('success','Successfully created feedback')
     res.redirect(`/matches/${match._id}`);
 }));
 
@@ -30,6 +31,7 @@ router.delete('/matches/:id/feedbacks/:feedbackId', catchError(async(req,res)=>{
     const {id, feedbackId} = req.params;
     await Match.findByIdAndUpdate(id,{$pull: {feedbacks:feedbackId}})
     await Feedback.findByIdAndDelete(feedbackId);
+    req.flash('success','Successfully deleted feedback')
     res.redirect(`/matches/${id}`);
 }));
 
