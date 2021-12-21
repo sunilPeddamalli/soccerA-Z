@@ -7,6 +7,7 @@ const ejsMate = require('ejs-mate');
 const expressError = require('./utils/expressError');
 const matches = require('./routes/matches.js')
 const feedbacks = require('./routes/feedbacks.js')
+const session = require('express-session');
 
 // moved to seperate route folder
 // const Match = require('./models/matches');
@@ -28,7 +29,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));
 app.engine('ejs', ejsMate);
-app.use(express.static(path.join(__dirname, '/public')))
+app.use(express.static(path.join(__dirname, '/public')));
+
+const sessionConfig = {
+    secret:'thisisasecret',
+    resave: false,
+    saveUninitialized:true,
+    cookie:{
+        httpOnly:true,
+        expires: Date.now()+1000*60*60*24*7,
+        maxAge: 1000*60*60*24*7
+    }
+}
+
+app.use(session(sessionConfig));
 
 app.get('/',(req,res)=>{
     res.send('Welcome!!!');
