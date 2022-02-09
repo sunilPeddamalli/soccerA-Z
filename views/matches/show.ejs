@@ -1,84 +1,105 @@
-<% layout('/layout/boilerplate') %> 
-<body>
+<% layout('/layout/boilerplate') %>
+
+  <body>
     <div class="row mt-3">
-        <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-            <div class="card">                
-                <div class="card-body">  
-                  <h5 class='text-center card-title'> 
-                    <span class="row m-0">                            
-                            <span class="col p-0 d-flex justify-content-end">
-                                <span class="px-2"><%= match.team1 %></span> 
-                            </span>
-                            <span class="col-2">
-                                <span class='px-1'><%= match.score1 %> - <%= match.score2 %> </span>
-                            </span>
-                            <span class="col-5 p-0 d-flex justify-content-start">
-                                <span class="px-2"><%= match.team2 %></span>     
-                            </span>                           
-                    </span>        
-                  </h5>
-                  <p class="card-text input-group">
-                      <small class="form-control border-0" >
-                          <% for(scorer of goalScorer1){ %> 
-                              <small class='d-block d-flex justify-content-end text-muted'><% if(scorer !=='') {%> ⛹️‍♂️ <% } %>   <%= scorer %></small>
-                            <% } %> 
-                      </small>
-                      <span class="input-group-text bg-white border-0"><% if(match.goalScorer1 !=='' || match.goalScorer2 !=='') {%> ⚽<% } %> </span>
-                      <small class="form-control border-0" >
-                          <% for(scorer of goalScorer2){ %> 
-                            <small class='d-block d-flex justify-content-start text-muted'><% if(scorer !=='') {%> ⛹️‍♂️ <% } %>  <%= scorer %></small>
-                          <% } %> 
-                      </small>
-                  </p>
-                </div>
+      <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class='text-center card-title'>
+              <span class="row m-0">
+                <span class="col p-0 d-flex justify-content-end">
+                  <span class="px-2">
+                    <%= match.team1 %>
+                  </span>
+                </span>
+                <span class="col-2">
+                  <span class='px-1'>
+                    <%= match.score1 %> - <%= match.score2 %>
+                  </span>
+                </span>
+                <span class="col-5 p-0 d-flex justify-content-start">
+                  <span class="px-2">
+                    <%= match.team2 %>
+                  </span>
+                </span>
+              </span>
+            </h5>
+            <p class="card-text input-group">
+              <small class="form-control border-0">
+                <% for(scorer of goalScorer1){ %>
+                  <small class='d-block d-flex justify-content-end text-muted'>
+                    <% if(scorer !=='' ) {%> ⛹️‍♂️ <% } %>
+                        <%= scorer %>
+                  </small>
+                  <% } %>
+              </small>
+              <span class="input-group-text bg-white border-0">
+                <% if(match.goalScorer1 !=='' || match.goalScorer2 !=='' ) {%> ⚽<% } %>
+              </span>
+              <small class="form-control border-0">
+                <% for(scorer of goalScorer2){ %>
+                  <small class='d-block d-flex justify-content-start text-muted'>
+                    <% if(scorer !=='' ) {%> ⛹️‍♂️ <% } %>
+                        <%= scorer %>
+                  </small>
+                  <% } %>
+              </small>
+            </p>
+          </div>
 
-                <div class=' list-group  text-muted text-center'>
-                  <small class='mt-2'>Player of the Match</small>
-                  <small class=' d-block text-muted fw-bold mb-2'>✨<%= match.playerOfTheMatch %> </small>
-                </div>
+          <div class=' list-group  text-muted text-center'>
+            <small class='mt-2'>Player of the Match</small>
+            <small class=' d-block text-muted fw-bold mb-2'>✨<%= match.playerOfTheMatch %> </small>
+          </div>
 
-                <img src="<%= match.image %>" class="card-img rounded " alt="...">
+          <img src="<%= match.image %>" class="card-img rounded " alt="...">
 
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">🏆 <%= match.title %></li>
-                  <li class="list-group-item">📅 <%= match.date %></li>
-                  <li class="list-group-item">🏁 <%= match.location %></li>
-                </ul>
-                
-                <div class="card-body">
-                  <a href="/matches/<%= match._id %>/edit" class="btn btn-info">Edit</a>
-                  <form action="/matches/<%=match._id%>?_method=DELETE" method="POST" class='d-inline'>
-                    <button class='btn btn-danger'>Delete</button>
-                  </form>
-                </div>
-            </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">🏆 <%= match.title %>
+            </li>
+            <li class="list-group-item">📅 <%= match.date %>
+            </li>
+            <li class="list-group-item">🚩 <%= match.location %>
+            </li>
+          </ul>
+
+          <div class="card-body">
+            <a href="/matches/<%= match._id %>/edit" class="btn btn-info">Edit</a>
+            <form action="/matches/<%=match._id%>?_method=DELETE" method="POST" class='d-inline'>
+              <button class='btn btn-danger'>Delete</button>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
 
     <div class="row mt-3">
-        <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-          <form action="/matches/<%=match._id%>/feedbacks" method="POST" novalidate class="validate-form">
-            <label for="feedback" class='form-label text-white'>Leave your feedback:</label>
-            <textarea type="text" class="form-control" placeholder=''
-              aria-label="feedback" rows='3' id='feedback' name=feedback[body] required></textarea>
-            <button class='btn btn-success form-control'>Submit</button>
-          </form>
-        </div>
+      <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        <form action="/matches/<%=match._id%>/feedbacks" method="POST" novalidate class="validate-form">
+          <label for="feedback" class='form-label text-white'>Leave your feedback:</label>
+          <textarea type="text" class="form-control" placeholder='' aria-label="feedback" rows='3' id='feedback'
+            name=feedback[body] required></textarea>
+          <button class='btn btn-success form-control'>Submit</button>
+        </form>
+      </div>
     </div>
 
-    <div class='row'>      
-        <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-          <% for(let feedback of match.feedbacks){ %> 
-            <div class="card mb-3">
-              <div class='class-body form-control bg-light bg-gradient text-muted'>
-                <h6 class='card-title pt-1 mb-0 d-inline'>feedback:</h6>
-                <form action="/matches/<%=match._id%>/feedbacks/<%=feedback._id%>?_method=DELETE" method="POST" class='d-inline'>
-                  <button class='btn btn-link text-danger'>Delete</button>
-                </form>
-                <small class='card-title d-block'><%= feedback.body %> </small>  
-              </div>
+    <div class='row'>
+      <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        <% for(let feedback of match.feedbacks){ %>
+          <div class="card mb-3">
+            <div class='class-body form-control bg-light bg-gradient text-muted'>
+              <h6 class='card-title pt-1 mb-0 d-inline'>feedback:</h6>
+              <form action="/matches/<%=match._id%>/feedbacks/<%=feedback._id%>?_method=DELETE" method="POST"
+                class='d-inline'>
+                <button class='btn btn-link text-danger'>Delete</button>
+              </form>
+              <small class='card-title d-block'>
+                <%= feedback.body %>
+              </small>
             </div>
-            <% } %> 
-        </div> 
+          </div>
+          <% } %>
+      </div>
     </div>
-</body>
+  </body>
