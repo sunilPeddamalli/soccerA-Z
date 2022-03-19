@@ -14,7 +14,7 @@ router.post('/register', catchError(async (req,res,next)=> {
       const {username, email, password} = req.body;
       const user = new User ({username, email});
       const registeredUser = await User.register(user,password);
-      flash('success', 'Welcome')
+      req.flash('success', 'Welcome')
       res.redirect('/matches')
    }
    catch(e){
@@ -22,5 +22,13 @@ router.post('/register', catchError(async (req,res,next)=> {
       res.redirect('/register')
    }
 }));
+
+router.get('/login', (req,res)=>{
+   res.render('user/login');
+})
+
+router.post('/login',(req,res)=>{
+   res.send(req.body)
+})
 
 module.exports = router;
