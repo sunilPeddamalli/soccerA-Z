@@ -12,6 +12,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const passportLocal = require('passport-local');
 const User = require('./models/user');
+const user = require('./routes/user')
 
 // moved to seperate route folder
 // const Match = require('./models/matches');
@@ -65,6 +66,8 @@ app.use((req,res,next)=>{
 app.get('/',(req,res)=>{
     res.send('Welcome!!!');
 })
+
+app.use('/', user);
 
 app.use('/',matches);
 
