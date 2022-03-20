@@ -31,7 +31,7 @@ router.post('/matches',isLoggedIn,validateMatch, catchError(async(req,res)=>{
    res.redirect(`/matches/${match._id}`)
 }));
 
-router.get('/matches/:id', catchError(async(req,res)=>{
+router.get('/matches/:id',isLoggedIn, catchError(async(req,res)=>{
     const {id} = req.params;
     const match = await Match.findById(id).populate('feedbacks');
     if(!match){
