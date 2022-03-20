@@ -5,7 +5,7 @@ const expressError = require('../utils/expressError');
 const catchError = require('../utils/catchError');
 const Match = require('../models/matches');
 const Feedback = require('../models/feedback');
-
+const {isLoggedIn} = require('../middleware.js')
 
 const validateFeedback = (req,res,next) => {
     const result = feedbackSchema.validate(req.body);
@@ -16,7 +16,7 @@ const validateFeedback = (req,res,next) => {
     }
 }
 
-router.post('/matches/:id/feedbacks',validateFeedback, catchError(async(req,res)=>{
+router.post('/matches/:id/feedbacks',isLoggedIn, validateFeedback, catchError(async(req,res)=>{
     const {id} = req.params;
     const match = await Match.findById(id);
     const feedback = new Feedback(req.body.feedback);
@@ -27,7 +27,7 @@ router.post('/matches/:id/feedbacks',validateFeedback, catchError(async(req,res)
     res.redirect(`/matches/${match._id}`);
 }));
 
-router.delete('/matches/:id/feedbacks/:feedbackId', catchError(async(req,res)=>{
+router.delete('/matches/:id/feedbacks/:feedbackId',isLoggedIn, catchError(async(req,res)=>{
     const {id, feedbackId} = req.params;
     await Match.findByIdAndUpdate(id,{$pull: {feedbacks:feedbackId}})
     await Feedback.findByIdAndDelete(feedbackId);
