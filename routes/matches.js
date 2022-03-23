@@ -4,7 +4,8 @@ const catchError = require('../utils/catchError');
 const Match = require('../models/matches');
 const expressError = require('../utils/expressError');
 const {matchSchema}= require('../schemas.js');
-const {isLoggedIn} = require('../middleware.js')
+const {isLoggedIn} = require('../middleware.js');
+const flash = require('connect-flash/lib/flash');
 
 const validateMatch = (req,res,next) => {
     const result= matchSchema.validate(req.body);
@@ -21,7 +22,9 @@ router.get('/matches',catchError(async(req,res)=>{
 }));
 
 router.get('/matches/new', isLoggedIn ,(req,res) =>{
-    res.render('matches/new');
+    if(req.user.username === 'Toto') return res.render('matches/new');
+    req.flash('error', "You don't have the permission");
+    res.redirect('/matches')
 });
 
 router.post('/matches',isLoggedIn,validateMatch, catchError(async(req,res)=>{
@@ -33,7 +36,7 @@ router.post('/matches',isLoggedIn,validateMatch, catchError(async(req,res)=>{
    res.redirect(`/matches/${match._id}`)
 }));
 
-router.get('/matches/:id',isLoggedIn, catchError(async(req,res)=>{
+router.get('/matches/:id', catchError(async(req,res)=>{
     const {id} = req.params;
     const match = await Match.findById(id).populate('feedbacks').populate('author');
     if(!match){

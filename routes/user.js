@@ -40,7 +40,9 @@ router.post('/login',passport.authenticate('local',{failureFlash: true, failureR
 router.get('/logout',(req,res)=> {
    req.logOut();
    req.flash('success', 'logged you out');
+   delete req.session.returnTo;
    res.redirect('/matches');
+  
 })
 
 module.exports = router;

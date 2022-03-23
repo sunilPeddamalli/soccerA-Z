@@ -1,9 +1,11 @@
 <% layout('/layout/boilerplate') %> 
 <body>
     <div class="row">
+        <% if(currentUser && currentUser.username == 'Toto') {%> 
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-end mb-1">
             <a class="btn btn-info me-md-2" href='/matches/new'>Add New Match</a>
-          </div>
+        </div>
+        <% } %> 
         <div class="col col-md-8 offset-md-2 col-lg-6 offset-lg-3">     
                 <% for(let i=matches.length-1; i>=0; i--){ %> 
                     <div class="list-group  rounded">
