@@ -1,3 +1,7 @@
+const Match = require('./models/matches');
+const expressError = require('./utils/expressError');
+const {matchSchema}= require('./schemas.js');
+
 module.exports.isLoggedIn = (req,res,next)=>{
    if(!req.isAuthenticated()){
       req.session.returnTo = req.originalUrl
@@ -6,6 +10,16 @@ module.exports.isLoggedIn = (req,res,next)=>{
    } else {
       next();
    }
+}
+
+module.exports.isAuthor = async(req, res, next) => {
+   const {id} = req.params;
+   const match = await Match.findById(id);
+   if(!match.author.equals(req.user._id)){
+       req.flash('error', "You don't have the permission");
+       return res.redirect(`/matches/${match._id}`);        
+   }
+   next();
 }
 
 module.exports.validateMatch = (req,res,next) => {

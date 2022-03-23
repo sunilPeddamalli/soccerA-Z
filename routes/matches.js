@@ -2,12 +2,7 @@ const express = require('express');
 const router = express.Router();
 const catchError = require('../utils/catchError');
 const Match = require('../models/matches');
-const expressError = require('../utils/expressError');
-const {matchSchema}= require('../schemas.js');
-const {isLoggedIn,validateMatch} = require('../middleware.js');
-const flash = require('connect-flash/lib/flash');
-
-
+const {isLoggedIn,isAuthor, validateMatch} = require('../middleware.js');
 
 router.get('/matches',catchError(async(req,res)=>{
     const matches =await Match.find({});
@@ -45,7 +40,7 @@ router.get('/matches/:id', catchError(async(req,res)=>{
     res.render('matches/show',{match, goalScorer1, goalScorer2});
 }));
 
-router.get('/matches/:id/edit',isLoggedIn, catchError(async (req,res)=>{
+router.get('/matches/:id/edit',isLoggedIn,isAuthor, catchError(async (req,res)=>{
     const {id} = req.params;
     const match = await Match.findById(id);
     if(!match){
@@ -55,14 +50,14 @@ router.get('/matches/:id/edit',isLoggedIn, catchError(async (req,res)=>{
     res.render('matches/edit',{match});
 }));
 
-router.put('/matches/:id',isLoggedIn, validateMatch, catchError(async(req,res,next)=>{
+router.put('/matches/:id',isLoggedIn,isAuthor, validateMatch, catchError(async(req,res,next)=>{
     const {id} = req.params;
     const match = await Match.findByIdAndUpdate(id,req.body.match,{new:true});
     req.flash('success','Successfully updated match')
     res.redirect(`/matches/${match._id}`);
 }));
 
-router.delete('/matches/:id',isLoggedIn, catchError(async (req,res)=>{
+router.delete('/matches/:id',isLoggedIn,isAuthor, catchError(async (req,res)=>{
     const {id} = req.params;
     await Match.findByIdAndDelete(id);
     req.flash('success','Successfully deleted match')
