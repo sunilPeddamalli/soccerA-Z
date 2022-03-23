@@ -63,12 +63,14 @@
             </li>
           </ul>
 
+          <% if(currentUser &&  match.author.equals( currentUser._id)){ %> 
           <div class="card-body">
             <a href="/matches/<%= match._id %>/edit" class="btn btn-info">Edit</a>
             <form action="/matches/<%=match._id%>?_method=DELETE" method="POST" class='d-inline'>
               <button class='btn btn-danger'>Delete</button>
             </form>
           </div>
+          <% } %> 
         </div>
       </div>
     </div>
