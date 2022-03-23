@@ -14,6 +14,10 @@ const matchSchema = new mongoose.Schema({
     // Time: String,
     title: String,
     location: String,
+    author:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        },
     feedbacks:[
             {
                 type:mongoose.Schema.Types.ObjectId,

@@ -26,6 +26,8 @@ router.get('/matches/new', isLoggedIn ,(req,res) =>{
 
 router.post('/matches',isLoggedIn,validateMatch, catchError(async(req,res)=>{
    const match = new Match(req.body.match);
+   match.author = req.user._id;
+   console.log(match);
    await match.save();
    req.flash('success','Successfully created match')
    res.redirect(`/matches/${match._id}`)
@@ -33,7 +35,7 @@ router.post('/matches',isLoggedIn,validateMatch, catchError(async(req,res)=>{
 
 router.get('/matches/:id',isLoggedIn, catchError(async(req,res)=>{
     const {id} = req.params;
-    const match = await Match.findById(id).populate('feedbacks');
+    const match = await Match.findById(id).populate('feedbacks').populate('author');
     if(!match){
         req.flash('error','Match not found');
         return res.redirect('/matches')
