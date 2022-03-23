@@ -37,6 +37,7 @@ router.get('/matches/:id', catchError(async(req,res)=>{
     }
     const goalScorer1 = match.goalScorer1.split(',');
     const goalScorer2 = match.goalScorer2.split(',');
+    req.session.returnTo = req.originalUrl,
     res.render('matches/show',{match, goalScorer1, goalScorer2});
 }));
 
