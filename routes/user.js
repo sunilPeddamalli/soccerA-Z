@@ -31,7 +31,7 @@ router.get('/login', (req,res)=>{
 })
 
 router.post('/login',passport.authenticate('local',{failureFlash: true, failureRedirect:'/login'}),(req,res)=>{
-   req.flash('success','Welcome!!!');
+   req.flash('success', `Welcome ${req.user.username} 🙂`);
    res.redirect(req.session.returnTo || '/matches');
    delete req.session.returnTo;
    
@@ -39,7 +39,7 @@ router.post('/login',passport.authenticate('local',{failureFlash: true, failureR
 
 router.get('/logout',(req,res)=> {
    req.logOut();
-   req.flash('success', 'logged you out');
+   req.flash('success', `logged you out 🔒 `);
    delete req.session.returnTo;
    res.redirect('/matches');
   

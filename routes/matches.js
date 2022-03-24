@@ -30,7 +30,10 @@ router.post('/matches',isLoggedIn,validateMatch, catchError(async(req,res)=>{
 
 router.get('/matches/:id', catchError(async(req,res)=>{
     const {id} = req.params;
-    const match = await Match.findById(id).populate('feedbacks').populate('author');
+    const match = await Match.findById(id).populate({
+        path: 'feedbacks',
+        populate:{path: 'author'}
+        }).populate('author');
     if(!match){
         req.flash('error','Match not found');
         return res.redirect('/matches')
