@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const catchError = require('../utils/catchError');
-const Match = require('../models/matches');
 const {isLoggedIn,isAuthor, validateMatch} = require('../middleware.js');
 const matches = require('../controllers/matches')
 
