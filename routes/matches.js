@@ -4,7 +4,9 @@ const catchError = require('../utils/catchError');
 const {isLoggedIn,isAuthor, validateMatch} = require('../middleware.js');
 const matches = require('../controllers/matches');
 const multer  = require('multer');
-const upload = multer({ dest: 'uploads/' });
+const {storage} = require('../cloudinary');
+const upload = multer({storage});
+
 
 router.get('/matches',catchError(matches.index));
 
