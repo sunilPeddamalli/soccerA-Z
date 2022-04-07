@@ -12,7 +12,7 @@ const Joi = require('joi');
          title: Joi.string().required(),
          date:Joi.string().required(),
          location: Joi.string().required(),
-         image:Joi.string().allow('')
+        //  image:Joi.string().allow('')
         }).required()
     });
 

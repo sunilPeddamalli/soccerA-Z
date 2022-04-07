@@ -2,13 +2,15 @@ const express = require('express');
 const router = express.Router();
 const catchError = require('../utils/catchError');
 const {isLoggedIn,isAuthor, validateMatch} = require('../middleware.js');
-const matches = require('../controllers/matches')
+const matches = require('../controllers/matches');
+const multer  = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 router.get('/matches',catchError(matches.index));
 
 router.get('/matches/new', isLoggedIn , matches.renderNewForm);
 
-router.post('/matches',isLoggedIn,validateMatch, catchError(matches.createMatch));
+router.post('/matches',isLoggedIn,upload.array('image'),validateMatch, catchError(matches.createMatch));
 
 router.get('/matches/:id', catchError(matches.showMatch));
 
