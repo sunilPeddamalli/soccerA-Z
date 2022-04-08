@@ -46,7 +46,7 @@
                 <div class="form-floating mb-3">
                     <input type='text' class='form-control' id='date' name='match[date]' placeholder='dd-mmm-yyyy' required>
                     <label for='date' class='form-label'>Date (dd-mmm-yyyy):</label>
-                </div>  
+                </div> 
                 
                 <div class="form-floating mb-3">
                     <input type='text' class='form-control' id='location' name='match[location]' placeholder='City, State' required>
@@ -59,8 +59,13 @@
                 </div>    -->
 
                 <div class="mb-3">
-                    <input type="file" name="image" multiple>
+                    <label for="image" class="form-label"></label>
+                    <input class="form-control" type="file" name="image" id="image" multiple>
                 </div>
+
+                <!-- <div class="mb-3">
+                    <input type="file" name="image" multiple>
+                </div> -->
 
                 <div class="mb-3 text-center">
                     <button class='btn btn-success form-control'>Add Match</button>

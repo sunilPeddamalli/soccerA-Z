@@ -52,9 +52,27 @@
             <small class=' d-block text-muted fw-bold mb-2'>✨<%= match.playerOfTheMatch %> </small>
           </div>
 
-          <% for(let image of match.images){ %> 
-            <img src="<%= image.url %>" class="card-img rounded " alt="...">
+          <div id="matchImageCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <% match.images.forEach((image, i)=> { %> 
+                <div class="carousel-item <%= i===0?'active':'' %>">
+                  <img src="<%= image.url %>" class="d-block w-100" alt="...">
+                </div>
+              <% }) %>            
+            </div>
+            <% if(match.images.length > 1) {%> 
+            <button class="carousel-control-prev" type="button" data-bs-target="#matchImageCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#matchImageCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
             <% } %> 
+          </div>
+
+
          
 
           <ul class="list-group list-group-flush">
