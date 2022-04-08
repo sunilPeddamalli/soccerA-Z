@@ -15,6 +15,10 @@ module.exports.createMatch = async(req,res)=>{
    if(req.user.username === 'Toto'){
   const match = new Match(req.body.match);
   match.author = req.user._id;
+  match.images = req.files.map(image => {
+     return {url: image.path, filename:image.filename}
+  });
+  console.log(match)
   await match.save();
   req.flash('success','Successfully created match')
   res.redirect(`/matches/${match._id}`)

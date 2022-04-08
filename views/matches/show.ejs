@@ -52,7 +52,10 @@
             <small class=' d-block text-muted fw-bold mb-2'>✨<%= match.playerOfTheMatch %> </small>
           </div>
 
-          <img src="<%= match.image %>" class="card-img rounded " alt="...">
+          <% for(let image of match.images){ %> 
+            <img src="<%= image.url %>" class="card-img rounded " alt="...">
+            <% } %> 
+         
 
           <ul class="list-group list-group-flush">
             <li class="list-group-item">🏆 <%= match.title %>

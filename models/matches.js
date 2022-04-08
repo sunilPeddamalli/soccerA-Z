@@ -10,7 +10,12 @@ const matchSchema = new mongoose.Schema({
     goalScorer2: String,
     playerOfTheMatch: String,
     date: String,
-    image: String,
+    images: [
+                {
+                    url:String,
+                    filename:String
+                }
+            ],
     // Time: String,
     title: String,
     location: String,
