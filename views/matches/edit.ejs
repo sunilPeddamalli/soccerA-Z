@@ -3,7 +3,7 @@
 <body>
     <div class="row mt-3">
         <div class="col col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-            <form action="/matches/<%= match._id %>?_method=PUT" method="POST" novalidate class="validate-form">
+            <form action="/matches/<%= match._id %>?_method=PUT" method="POST" novalidate class="validate-form" enctype="multipart/form-data">
                 <div class='mb-3'>
                     <label for="team1" class='form-label text-white'>First Team:</label>
                     <div class="input-group">
@@ -55,10 +55,10 @@
                     <label for='location' class='form-label'>Location (City, State):</label>
                 </div>
                 
-                <div class="form-floating mb-3">
-                    <input type='text' class='form-control' id='image' name='match[image]' placeholder='Add Image URL' value="<%= match.image%>">
-                    <label for='image' class='form-label'>ImageUrl:</label>
-                </div>   
+                <div class="mb-3">
+                    <label for="image" class="form-label"></label>
+                    <input class="form-control" type="file" name="image" id="image" multiple>
+                </div>
 
                 <div class="mb-3 text-center">
                     <button class='btn btn-warning'>Save Match</button>

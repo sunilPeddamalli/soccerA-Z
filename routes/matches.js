@@ -18,7 +18,7 @@ router.get('/matches/:id', catchError(matches.showMatch));
 
 router.get('/matches/:id/edit',isLoggedIn,isAuthor, catchError(matches.renderEditForm));
 
-router.put('/matches/:id',isLoggedIn,isAuthor, validateMatch, catchError(matches.editMatch));
+router.put('/matches/:id',isLoggedIn,isAuthor,upload.array('image'),validateMatch, catchError(matches.editMatch));
 
 router.delete('/matches/:id',isLoggedIn,isAuthor, catchError(matches.deleteMatch));
 

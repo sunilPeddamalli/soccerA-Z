@@ -56,6 +56,11 @@ module.exports.renderEditForm = async (req,res)=>{
 module.exports.editMatch = async(req,res,next)=>{
    const {id} = req.params;
    const match = await Match.findByIdAndUpdate(id,req.body.match,{new:true});
+   const img = req.files.map(image => {
+      return {url: image.path, filename:image.filename}
+   });
+   match.images.push(...img)
+   await match.save();
    req.flash('success','Successfully updated match')
    res.redirect(`/matches/${match._id}`);
 };
