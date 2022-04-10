@@ -1,6 +1,16 @@
 const mongoose = require('mongoose');
 const Feedback = require('./feedback');
 
+const ImageSchema = new mongoose.Schema( {
+    url:String,
+    filename:String
+})
+
+ImageSchema.virtual('thumbnail').get(function(){
+    return this.url.replace('/upload','/upload/w_200')
+});
+
+
 const matchSchema = new mongoose.Schema({
     team1: String,
     score1: Number,
@@ -10,12 +20,7 @@ const matchSchema = new mongoose.Schema({
     goalScorer2: String,
     playerOfTheMatch: String,
     date: String,
-    images: [
-                {
-                    url:String,
-                    filename:String
-                }
-            ],
+    images: [ImageSchema],
     // Time: String,
     title: String,
     location: String,
