@@ -13,7 +13,8 @@ const Joi = require('joi');
          date:Joi.string().required(),
          location: Joi.string().required(),
         //  image:Joi.string().allow('')
-        }).required()
+        }).required(),
+        deleteImages: Joi.array()
     });
 
     module.exports.feedbackSchema = Joi.object({

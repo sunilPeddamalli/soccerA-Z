@@ -1,3 +1,4 @@
+const { cloudinary } = require('../cloudinary');
 const Match = require('../models/matches');
 
 module.exports.index = async(req,res)=>{
@@ -61,6 +62,12 @@ module.exports.editMatch = async(req,res,next)=>{
    });
    match.images.push(...img)
    await match.save();
+   if(req.body.deleteImages){
+      await match.updateOne({$pull:{images:{filename:{$in:req.body.deleteImages}}}})
+      for(let filename of req.body.deleteImages){
+         await cloudinary.uploader.destroy(filename)
+      }     
+   } 
    req.flash('success','Successfully updated match')
    res.redirect(`/matches/${match._id}`);
 };
