@@ -7,9 +7,8 @@ const ImageSchema = new mongoose.Schema( {
 })
 
 ImageSchema.virtual('thumbnail').get(function(){
-    return this.url.replace('/upload','/upload/w_200')
+    return this.url.replace('/upload','/upload/w_200,c_limit')
 });
-
 
 const matchSchema = new mongoose.Schema({
     team1: String,

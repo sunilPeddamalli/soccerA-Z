@@ -68,7 +68,7 @@ app.use((req,res,next)=>{
 }) 
 
 app.get('/',(req,res)=>{
-    res.send('Welcome!!!');
+    res.render('matches/home',{matches});
 })
 
 app.use('/', user);
