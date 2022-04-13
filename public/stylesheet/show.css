@@ -1,3 +1,6 @@
 #matchImageCarousel{
-   /* height: 290px; */
+   height: 360px;
+   display: flex;
+   /* background-color: rgb(196, 192, 192); */
 }
+

@@ -7,8 +7,13 @@ const ImageSchema = new mongoose.Schema( {
 })
 
 ImageSchema.virtual('thumbnail').get(function(){
-    return this.url.replace('/upload','/upload/w_200,c_limit')
+    return this.url.replace('/upload','/upload/w_150,h_100,c_limit')
 });
+
+ImageSchema.virtual('showThumbnail').get(function(){
+    return this.url.replace('/upload','/upload/c_limit')
+});
+
 
 const matchSchema = new mongoose.Schema({
     team1: String,

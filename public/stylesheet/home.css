@@ -1,8 +1,9 @@
 body {
-   height: 100vh;
-   background-image: url("https://res.cloudinary.com/dgwjefrjq/image/upload/v1649634479/SoccerA-Z/soccer2_egtbea.jpg");
-   background-size: cover;
-   background-position: center; 
+   /* height: 100vh;
+   background-image: url("https://res.cloudinary.com/dgwjefrjq/image/upload/v1649634479/SoccerA-Z/soccer2_egtbea.jpg"); */
+  
+   /* background-size: cover; */
+   /* background-position: center;  */
+   background-color: black;
 }
-
 
