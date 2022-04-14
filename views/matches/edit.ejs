@@ -35,25 +35,35 @@
                     </div>
                 </div>
 
+                <div class="row g-3"> 
+                <div class="col">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="playerOfTheMatch" name = 'match[playerOfTheMatch]' value="<%= match.playerOfTheMatch %>" required>
                     <label for="playerOfTheMatch" class="form-label">Player of the Match:</label>
                 </div>
-
+                </div>
+                <div class="col">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="title" name = 'match[title]' placeholder="Enter Title" value="<%= match.title %>" required>
                     <label for="title" class="form-label">Title:</label>
                 </div>
+                </div>
+                </div>
 
+                <div class="row g-3">
+                <div class="col">
                 <div class="form-floating mb-3">
-                    <input type='text' class='form-control' id='date' name='match[date]' placeholder='dd-mmm-yyyy' value="<%= match.date%>" required>
-                    <label for='date' class='form-label'>Date (dd-mmm-yyyy):</label>
-                </div>  
-                
+                    <input type='datetime-local' class='form-control' id='date' name='match[date]' placeholder='dd-mmm-yyyy' value="<%=match.date%>" required>
+                    <label for='date' class='form-label'>Date & Time:</label>
+                </div> 
+                </div>
+                <div class="col">
                 <div class="form-floating mb-3">
                     <input type='text' class='form-control' id='location' name='match[location]' placeholder='City, State' value="<%= match.location %>" required>
                     <label for='location' class='form-label'>Location (City, State):</label>
                 </div>
+                </div>
+             </div>
                 
                 <div class="mb-3">
                     <label for="image" class="form-label"></label>

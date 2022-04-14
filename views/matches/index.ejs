@@ -12,7 +12,7 @@
                         <a href="/matches/<%= matches[i]._id %>" class='list-group-item list-group-item-action btn btn-outline-info'>
                             <div class='d-flex justify-content-between'>
                                 <small class="text-muted badge rounded-pill bg-light"><%= matches[i].title %> </small>
-                                <small class="text-muted badge rounded-pill bg-light"><%= matches[i].date %> </small>    
+                                <small class="text-muted badge rounded-pill bg-light"><%=new Date(matches[i].date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})%> </small>    
                             </div>                        
  
                             <div class='text-center'> 

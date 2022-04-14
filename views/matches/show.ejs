@@ -74,14 +74,12 @@
             </button>
             <% } %> 
           </div>
-
-
          
 
           <ul class="list-group list-group-flush">
             <li class="list-group-item">🏆 <%= match.title %>
             </li>
-            <li class="list-group-item">📅 <%= match.date %>
+            <li class="list-group-item">📅 <%=new Date(match.date).toDateString()%> -   <%=new Date(match.date).toLocaleTimeString('en-US',{hour:'numeric',minute:'numeric'})%>
             </li>
             <li class="list-group-item">🚩 <%= match.location %>
             </li>
